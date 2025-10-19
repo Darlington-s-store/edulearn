@@ -17,6 +17,9 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const aiRoutes = require('./routes/aiRoutes');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const subscriptionRoutes = require('./routes/subscriptionRoutes');
+const enrollmentRoutes = require('./routes/enrollmentRoutes');
+const courseRoutes = require('./routes/courseRoutes');
 
 const app = express();
 
@@ -53,6 +56,9 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/subscriptions', subscriptionRoutes);
+app.use('/api/enrollments', enrollmentRoutes);
+app.use('/api/courses', courseRoutes);
 
 // 404 handler
 app.use((req, res) => {

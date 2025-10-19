@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
-const Module = sequelize.define('Module', {
+const Course = sequelize.define('Course', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -14,18 +14,6 @@ const Module = sequelize.define('Module', {
       model: 'users',
       key: 'id'
     }
-  },
-  courseId: {
-    type: DataTypes.UUID,
-    allowNull: true,
-    references: {
-      model: 'courses',
-      key: 'id'
-    }
-  },
-  order: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0
   },
   title: {
     type: DataTypes.STRING,
@@ -43,36 +31,36 @@ const Module = sequelize.define('Module', {
     type: DataTypes.STRING,
     allowNull: true
   },
-  difficulty: {
-    type: DataTypes.ENUM('beginner', 'intermediate', 'advanced'),
-    defaultValue: 'beginner'
-  },
-  content: {
-    type: DataTypes.JSONB,
-    allowNull: false,
-    defaultValue: {
-      lessons: []
-    }
-  },
   thumbnail: {
     type: DataTypes.STRING,
     allowNull: true
   },
   duration: {
     type: DataTypes.INTEGER,
-    allowNull: true,
-    comment: 'Duration in minutes'
-  },
-  status: {
-    type: DataTypes.ENUM('draft', 'published', 'archived'),
-    defaultValue: 'draft'
-  },
-  publishedAt: {
-    type: DataTypes.DATE,
     allowNull: true
+  },
+  difficulty: {
+    type: DataTypes.ENUM('beginner', 'intermediate', 'advanced'),
+    defaultValue: 'beginner'
+  },
+  isPublished: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  enrollmentCount: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  rating: {
+    type: DataTypes.DECIMAL(3, 2),
+    defaultValue: 0.00
+  },
+  metadata: {
+    type: DataTypes.JSON,
+    defaultValue: {}
   }
 }, {
-  tableName: 'modules'
+  tableName: 'courses'
 });
 
-module.exports = Module;
+module.exports = Course;

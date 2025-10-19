@@ -11,6 +11,8 @@ const LiveClass = require('./LiveClass');
 const Enrollment = require('./Enrollment');
 const Notification = require('./Notification');
 const UserPreferences = require('./UserPreferences');
+const Subscription = require('./Subscription');
+const Course = require('./Course');
 
 // Define associations
 
@@ -66,6 +68,22 @@ Notification.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 User.hasOne(UserPreferences, { foreignKey: 'userId', as: 'preferences' });
 UserPreferences.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
+// Subscription associations
+User.hasMany(Subscription, { foreignKey: 'userId', as: 'subscriptions' });
+Subscription.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+// Course associations
+User.hasMany(Course, { foreignKey: 'teacherId', as: 'courses' });
+Course.belongsTo(User, { foreignKey: 'teacherId', as: 'Teacher' });
+
+Course.hasMany(Module, { foreignKey: 'courseId', as: 'Modules' });
+Module.belongsTo(Course, { foreignKey: 'courseId', as: 'course' });
+
+Course.hasMany(Enrollment, { foreignKey: 'courseId', as: 'enrollments' });
+Enrollment.belongsTo(Course, { foreignKey: 'courseId', as: 'course' });
+
+Enrollment.belongsTo(User, { foreignKey: 'studentId', as: 'Student' });
+
 module.exports = {
   sequelize,
   User,
@@ -79,5 +97,7 @@ module.exports = {
   LiveClass,
   Enrollment,
   Notification,
-  UserPreferences
+  UserPreferences,
+  Subscription,
+  Course
 };

@@ -15,6 +15,14 @@ const Enrollment = sequelize.define('Enrollment', {
       key: 'id'
     }
   },
+  courseId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: 'courses',
+      key: 'id'
+    }
+  },
   moduleId: {
     type: DataTypes.UUID,
     allowNull: true,
